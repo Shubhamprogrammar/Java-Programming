@@ -37,6 +37,19 @@ public class ConditionalStatements {
         }
         System.out.println("Your program run successfully!");
         sc.close();
+
+        System.out.println("Enter a number for the day");
+        int day = sc.nextInt();
+        switch(day){
+            case 1 -> System.out.println("Monday");
+            case 2 -> System.out.println("Tuesday");
+            case 3 -> System.out.println("Wednesday");
+            case 4 -> System.out.println("Thursday");
+            case 5 -> System.out.println("Friday");
+            case 6 -> System.out.println("Saturday");
+            case 7 -> System.out.println("Sunday");
+            default -> System.out.println("Wrong input");
+        }
     }
 }
 
@@ -48,3 +61,4 @@ public class ConditionalStatements {
 //      If n is even and in the inclusive range of 2 to 5, print Not Weird
 //      If n is even and in the inclusive range of 6 to 20, print Weird
 //      If n is even and greater than 20, print Not Weird
+// Q.3. Write a program to find the year entered by the user is leap year or not
