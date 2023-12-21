@@ -20,6 +20,22 @@ public class Loop_Statements {
             System.out.println(b);
         }
 
+        // For- Each Loop
+        String[] friends = { "Shubham", "Apurv", "Bhavesh", "suraj", "Jitendra", "Omkaar", "lokesh" };
+        // Displaying an array (Array traversal)
+        for (int k = 0; i < friends.length; k++) {
+            System.out.println(friends[k]);
+        }
+        // In reverse order printing
+        for (int j = friends.length - 1; j >= 0; j--) {
+            System.out.println(friends[j]);
+        }
+
+        // for each loop
+        for (String str : friends) {
+            System.out.println(str);
+        }
+
         // Break and Continue
         int n=1;
         do {
