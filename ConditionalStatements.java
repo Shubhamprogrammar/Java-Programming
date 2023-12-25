@@ -36,7 +36,6 @@ public class ConditionalStatements {
                 break;
         }
         System.out.println("Your program run successfully!");
-        sc.close();
 
         System.out.println("Enter a number for the day");
         int day = sc.nextInt();
@@ -50,6 +49,7 @@ public class ConditionalStatements {
             case 7 -> System.out.println("Sunday");
             default -> System.out.println("Wrong input");
         }
+         sc.close();
     }
 }
 
