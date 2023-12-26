@@ -15,3 +15,9 @@ public class Arrays {
         }
     }
 }
+
+// Practice
+// Q.1. Write a program to get the smaller element in array for the general case
+// Q.2. Write a program to get the larger element in array for the general case
+// Q.3. Write a program to reverse the array and store it into another array
+// Q.4. Write a program to search the element in array return index if present otherwise not found
