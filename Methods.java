@@ -24,3 +24,9 @@ public class Methods {
         
     }
 }
+
+// Practice
+// Q.1. Write a program to count the number of vowels in the string and string will be taken by input
+// Q.2. Write a program to compute the sum of digits in integer
+// Q.3. Write a java program to calulate the area of triangle
+// Q.4. Write a program to break the string into substring with only two characters(Shubham-->sh,hu,ub,bh...)
