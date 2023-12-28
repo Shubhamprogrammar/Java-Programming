@@ -4,6 +4,10 @@ public class Arrays {
         marks[1] = 52;
         System.out.println(marks[1]);
 
+        String arr[];
+        arr = new String[5];
+        arr[0]="Ram";
+
         int[] roll_no = { 10, 20, 30, 40, 50 };
         // Array Traversal
         for (int i = 0; i < 5; i++) {
