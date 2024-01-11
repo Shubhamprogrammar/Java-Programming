@@ -1,0 +1,281 @@
+
+Q.1. Write a Java program to print the sum (addition), multiply, subtract, divide and remainder of two numbers.
+
+public class Sample{
+ 
+ public static void main(String[] args) {
+  Scanner in = new Scanner(System.in);
+
+  System.out.print("Input first number: ");
+  int num1 = in.nextInt();
+  System.out.print("Input second number: ");
+  int num2 = in.nextInt();
+
+  System.out.println(num1 + " + " + num2 + " = " + (num1 + num2));
+ 
+  System.out.println(num1 + " - " + num2 + " = " + (num1 - num2));
+
+  System.out.println(num1 + " x " + num2 + " = " + (num1 * num2));
+
+  System.out.println(num1 + " / " + num2 + " = " + (num1 / num2));
+
+  System.out.println(num1 + " mod " + num2 + " = " + (num1 % num2);
+ }
+} 
+
+Q.2. Write a Java program to swap the value of two variables.
+
+public class Sample {
+ 
+ public static void main(String[] args) {
+   int a, b, temp;
+   a = 15;
+   b = 27;
+   System.out.println("Before swapping : a, b = " + a + ", " + b);
+
+   temp = a;
+   a = b;
+   b = temp;   
+
+   System.out.println("After swapping : a, b = " + a + ", " + b);
+ }
+}
+
+Q.3. Write a Java method to find the smallest number among three numbers.
+
+// It can be done through the if-else condition
+import java.util.Scanner;
+public class Sample {
+  public static double smallest(double x, double y, double z)
+    {
+        return Math.min(Math.min(x, y), z);
+    }
+ public static void main(String[] args)
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Input the first number: ");
+        double x = in.nextDouble();
+        System.out.print("Input the Second number: ");
+        double y = in.nextDouble();
+        System.out.print("Input the third number: ");
+        double z = in.nextDouble();
+        System.out.print("The smallest value is " + smallest(x, y, z)+"\n" );
+    }
+}
+
+Q.4. Write a Java method to compute the average of three numbers.
+
+import java.util.Scanner;
+public class Sample{
+  public static double average(int x, int y, int z)
+    {
+        return (x + y + z) / 3;
+    }
+  public static void main(String[] args)
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Input the first number: ");
+        double x = in.nextInt();
+        System.out.print("Input the second number: ");
+        double y = in.nextInt();
+        System.out.print("Input the third number: ");
+        double z = in.nextInt();
+        System.out.print("The average value is " + average(x, y, z)+"\n" );
+    }
+}
+
+Q.5. Write a Java method to display the middle character of a string. a) If the length of the string is odd there will be two middle characters. b) If the length of the string is even there will be one middle character
+
+import java.util.Scanner;
+public class sample {
+public static String middle(String str)
+    {
+        int position;
+        int length;
+        if (str.length() % 2 == 0)
+        {
+            position = str.length() / 2 - 1;
+            length = 2;
+        }
+        else
+        {
+            position = str.length() / 2;
+            length = 1;
+        }
+        return str.substring(position, position + length);
+    }
+  public static void main(String[] args)
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Input a string: ");
+        String str = in.nextLine();
+        System.out.print("The middle character in the string: " + middle(str)+"\n");
+    }
+}
+
+Q.6. Write a Java method to compute the sum of digits in an integer.
+
+import java.util.Scanner;
+public class Sample {
+ public static int sumDigits(long n) {
+	int result = 0;
+	while(n > 0) {
+		result += n % 10;
+		n /= 10;
+		}
+	return result;
+	}
+  public static void main(String[] args)
+    {
+      Scanner in = new Scanner(System.in);
+      System.out.print("Input an integer: ");
+      int digits = in.nextInt();
+	  System.out.println("The sum is " + sumDigits(digits));
+    }	
+ }
+
+Q.7. Write a Java method to check whether a year (integer) entered by the user is a leap year or not.
+
+import java.util.Scanner;
+public class Sample{
+   public static void main(String[] args){
+      int year;
+      System.out.println("Enter an Year :: ");
+      Scanner sc = new Scanner(System.in);
+      year = sc.nextInt();
+      if (((year % 4 == 0) && (year % 100!= 0)) || (year%400 == 0))
+         System.out.println("Specified year is a leap year");
+      else
+         System.out.println("Specified year is not a leap year");
+   }
+}
+
+Q.8. Write a Java program that takes three numbers from the user and prints the greatest number.
+
+import java.util.Scanner;
+public class Sample {
+  public static void main(String[] args) {
+  Scanner in = new Scanner(System.in);
+   
+  System.out.print("Input the 1st number: ");
+  int num1 = in.nextInt();
+   
+  System.out.print("Input the 2nd number: ");
+  int num2 = in.nextInt();
+   
+  System.out.print("Input the 3rd number: ");
+  int num3 = in.nextInt();
+   
+   
+  if (num1 > num2 && num1 > num3){
+    System.out.println("The greatest: " + num1);
+      
+  }
+  else if (num2 > num1 && num2 > num3){
+    System.out.println("The greatest: " + num2);
+      
+  }
+  else{
+    System.out.println("The greatest: " + num3);
+  }
+ }
+}
+
+Q.9. Write a Java program that reads two floating-point numbers and tests whether they are the same up to three decimal places.
+
+import java.util.Scanner;
+public class Sample {    
+  public static void main(String[] args)
+    {
+        Scanner in = new Scanner(System.in);
+
+        System.out.print("Input floating-point number: ");
+        double x = in.nextDouble();
+        System.out.print("Input floating-point another number: ");
+        double y = in.nextDouble();
+
+        x = Math.round(x * 1000);
+        x = x / 1000;
+
+        y = Math.round(y * 1000);
+        y = y / 1000;
+
+        if (x == y)
+        {
+            System.out.println("They are the same up to three decimal places");
+        }
+        else
+        {
+            System.out.println("They are different");
+        }
+    }
+}
+
+Q.10. Write a Java program to find the number of days in a month.
+
+import java.util.Scanner;
+public class Sample{    
+  public static void main(String[] strings) {
+        Scanner input = new Scanner(System.in);
+        int number_Of_DaysInMonth = 0; 
+        String MonthOfName = "Unknown";
+        System.out.print("Input a month number: ");
+        int month = input.nextInt();
+        System.out.print("Input a year: ");
+        int year = input.nextInt();
+        switch (month) {
+            case 1:
+                MonthOfName = "January";
+                number_Of_DaysInMonth = 31;
+                break;
+            case 2:
+                MonthOfName = "February";
+                if ((year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0))) {
+                    number_Of_DaysInMonth = 29;
+                } else {
+                    number_Of_DaysInMonth = 28;
+                }
+                break;
+            case 3:
+                MonthOfName = "March";
+                number_Of_DaysInMonth = 31;
+                break;
+            case 4:
+                MonthOfName = "April";
+                number_Of_DaysInMonth = 30;
+                break;
+            case 5:
+                MonthOfName = "May";
+                number_Of_DaysInMonth = 31;
+                break;
+            case 6:
+                MonthOfName = "June";
+                number_Of_DaysInMonth = 30;
+                break;
+            case 7:
+                MonthOfName = "July";
+                number_Of_DaysInMonth = 31;
+                break;
+            case 8:
+                MonthOfName = "August";
+                number_Of_DaysInMonth = 31;
+                break;
+            case 9:
+                MonthOfName = "September";
+                number_Of_DaysInMonth = 30;
+                break;
+            case 10:
+                MonthOfName = "October";
+                number_Of_DaysInMonth = 31;
+                break;
+            case 11:
+                MonthOfName = "November";
+                number_Of_DaysInMonth = 30;
+                break;
+            case 12:
+                MonthOfName = "December";
+                number_Of_DaysInMonth = 31;
+        }
+        System.out.print(MonthOfName + " " + year + " has " + number_Of_DaysInMonth + " days\n");
+    }
+}
