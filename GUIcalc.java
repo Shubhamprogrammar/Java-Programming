@@ -1,175 +1,103 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+public class GUIcalc {
+    private JFrame frame;
+    private JTextField display;
+    private double firstNumber = 0;
+    private String operator = "";
+    private boolean isNewCalculation = true;
 
-public class GUIcalc implements ActionListener {
-    private static JTextField inputBox;
-
-    GUIcalc() {}
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String command = e.getActionCommand();
-        if (command.charAt(0) == 'C') {
-            inputBox.setText("");
-        } else if (command.charAt(0) == '=') {
-            inputBox.setText(evaluate(inputBox.getText()));
-        } else {
-            inputBox.setText(inputBox.getText() + command);
-        }
-    }
-
-    public static String evaluate(String expression) {
-        char[] arr = expression.toCharArray();
-        String operand1 = "";
-        String operand2 = "";
-        String operator = "";
-        double result = 0;
-
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] >= '0' && arr[i] <= '9' || arr[i] == '.') {
-                if (operator.isEmpty()) {
-                    operand1 += arr[i];
-                } else {
-                    operand2 += arr[i];
-                }
-            }
-            if (arr[i] == '+' || arr[i] == '-' || arr[i] == '/' || arr[i] == '*') {
-                operator += arr[i];
-            }
-        }
-        if (operator.equals("+")) {
-            result = (Double.parseDouble(operand1) + Double.parseDouble(operand2));
-        } else if (operator.equals("-")) {
-            result = (Double.parseDouble(operand1) - Double.parseDouble(operand2));
-        }
-        else if (operator.equals("/")) {
-            result = (Double.parseDouble(operand1) / Double.parseDouble(operand2));
-        }
-        else  {
-            result = (Double.parseDouble(operand1) * Double.parseDouble(operand2));
-        }
-        return operand1 + operator + operand2 +"="+result;
-    }
-
-    private static void createWindow() {
-        JFrame frame = new JFrame("Calculator");
+    public GUIcalc() {
+        frame = new JFrame("Simple Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        createUI(frame);
-        frame.setSize(400, 400);
-        frame.setLocationRelativeTo(null);
+        frame.setSize(300, 400);
+        frame.setLayout(new BorderLayout());
+
+        display = new JTextField();
+        display.setHorizontalAlignment(JTextField.RIGHT);
+        display.setFont(new Font("Arial", Font.PLAIN, 20));
+        frame.add(display, BorderLayout.NORTH);
+
+        JPanel buttonPanel = new JPanel(new GridLayout(4, 4));
+        frame.add(buttonPanel, BorderLayout.CENTER);
+
+        String[] buttonLabels = {
+            "7", "8", "9", "/",
+            "4", "5", "6", "*",
+            "1", "2", "3", "-",
+            "0", "C", "=", "+"
+        };
+
+        for (String label : buttonLabels) {
+            JButton button = new JButton(label);
+            button.setFont(new Font("Arial", Font.PLAIN, 18));
+            buttonPanel.add(button);
+            button.addActionListener(new ButtonClickListener());
+        }
+
         frame.setVisible(true);
     }
 
-    private static void createUI(JFrame frame) {
-        JPanel panel = new JPanel();
-        GUIcalc calc = new GUIcalc();
-        GridBagLayout layout = new GridBagLayout();
-        GridBagConstraints gbc = new GridBagConstraints();
-        panel.setLayout(layout);
-        inputBox = new JTextField(10);
-        inputBox.setEditable(false);
-        JButton b0 = new JButton("0");
-        JButton b1 = new JButton("1");
-        JButton b2 = new JButton("2");
-        JButton b3 = new JButton("3");
-        JButton b4 = new JButton("4");
-        JButton b5 = new JButton("5");
-        JButton b6 = new JButton("6");
-        JButton b7 = new JButton("7");
-        JButton b8 = new JButton("8");
-        JButton b9 = new JButton("9");
+    private class ButtonClickListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            String command = e.getActionCommand();
 
-        JButton buttonPlus = new JButton("+");
-        JButton buttonDivide = new JButton("/");
-        JButton buttonMultiply = new JButton("*");
-        JButton buttonMinus = new JButton("-");
-        JButton buttonDot = new JButton(".");
-        JButton buttonClear = new JButton("C");
-        JButton buttonEquals = new JButton("=");
+            if (command.matches("[0-9]")) {
+                if (isNewCalculation) {
+                    display.setText(command);
+                    isNewCalculation = false;
+                } else {
+                    display.setText(display.getText() + command);
+                }
+            } else if (command.equals("C")) {
+                display.setText("");
+                firstNumber = 0;
+                operator = "";
+                isNewCalculation = true;
+            } else if (command.equals("=")) {
+                double secondNumber = Double.parseDouble(display.getText());
+                double result = performOperation(firstNumber, secondNumber, operator);
+                display.setText(String.valueOf(result));
+                firstNumber = result;
+                operator = "";
+                isNewCalculation = true;
+            } else if (command.matches("[+\\-*/]")) {
+                if (!operator.isEmpty()) {
+                    double secondNumber = Double.parseDouble(display.getText());
+                    firstNumber = performOperation(firstNumber, secondNumber, operator);
+                    display.setText(String.valueOf(firstNumber));
+                } else {
+                    firstNumber = Double.parseDouble(display.getText());
+                }
+                operator = command;
+                isNewCalculation = true;
+            }
+        }
+    }
 
-        b1.addActionListener(calc);
-        b2.addActionListener(calc);
-        b3.addActionListener(calc);
-        b4.addActionListener(calc);
-        b5.addActionListener(calc);
-        b6.addActionListener(calc);
-        b7.addActionListener(calc);
-        b8.addActionListener(calc);
-        b9.addActionListener(calc);
-        b0.addActionListener(calc);
-
-        buttonPlus.addActionListener(calc);
-        buttonMinus.addActionListener(calc);
-        buttonMultiply.addActionListener(calc);
-        buttonDivide.addActionListener(calc);
-        buttonDot.addActionListener(calc);
-        buttonClear.addActionListener(calc);
-        buttonEquals.addActionListener(calc);
-
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        panel.add(b1, gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        panel.add(b2, gbc);
-        gbc.gridx = 2;
-        gbc.gridy = 0;
-        panel.add(b3, gbc);
-        gbc.gridx = 3;
-        gbc.gridy = 0;
-        panel.add(buttonPlus, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        panel.add(b4, gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        panel.add(b5, gbc);
-        gbc.gridx = 2;
-        gbc.gridy = 1;
-        panel.add(b6, gbc);
-        gbc.gridx = 3;
-        gbc.gridy = 1;
-        panel.add(buttonMinus, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        panel.add(b7, gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        panel.add(b8, gbc);
-        gbc.gridx = 2;
-        gbc.gridy = 2;
-        panel.add(b9, gbc);
-        gbc.gridx = 3;
-        gbc.gridy = 2;
-        panel.add(buttonDivide, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        panel.add(buttonDot, gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        panel.add(b0, gbc);
-        gbc.gridx = 2;
-        gbc.gridy = 3;
-        panel.add(buttonClear, gbc);
-        gbc.gridx = 3;
-        gbc.gridy = 3;
-        panel.add(buttonMultiply, gbc);
-        gbc.gridwidth = 3;
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        panel.add(inputBox, gbc);
-        gbc.gridx = 3;
-        gbc.gridy = 4;
-        panel.add(buttonEquals, gbc);
-
-        frame.getContentPane().add(panel, BorderLayout.CENTER);
+    private double performOperation(double num1, double num2, String operator) {
+        switch (operator) {
+            case "+":
+                return num1 + num2;
+            case "-":
+                return num1 - num2;
+            case "*":
+                return num1 * num2;
+            case "/":
+                if (num2 != 0) {
+                    return num1 / num2;
+                } else {
+                    return Double.NaN; // Handle division by zero
+                }
+            default:
+                return num2;
+        }
     }
 
     public static void main(String[] args) {
-        createWindow();
+        SwingUtilities.invokeLater(() -> new GUIcalc());
     }
 }
