@@ -21,7 +21,7 @@ public class FileHandling {
         // Code to write in file
         try {
             FileWriter fw = new FileWriter("Example111.txt");
-            fw.write("This is Shubham writing code from CodeWithHarry Tutorial\nBye Good Night\n");
+            fw.write("This is Shubham writing code from Disha Computer Institute\nBye Good Night\n");
             fw.append("Jay Shree Krishna");
             fw.close();
         } catch (IOException e) {
